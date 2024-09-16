@@ -1,0 +1,28 @@
+. /boot/config/plugins/plexmediaserver/settings.ini
+
+# set identification variables
+export PLEX_MEDIA_SERVER_INFO_VENDOR=Unraid
+export PLEX_MEDIA_SERVER_INFO_MODEL="$(uname -m)"
+export PLEX_MEDIA_SERVER_INFO_PLATFORM_VERSION="Unraid OS $(grep version /etc/unraid-version | cut -d \" -f2)"
+
+# set temp directory path based on settings.ini
+export TMPDIR="$PLEX_MEDIA_SERVER_TMPDIR"
+export PLEX_MEDIA_SERVER_TMPDIR="$PLEX_MEDIA_SERVER_TMPDIR"
+
+# set PMS installation path based on settings.ini
+export PLEX_MEDIA_SERVER_HOME="$PLEX_MEDIA_SERVER_HOME"
+
+# append "/Application Support" to application support path defined in settings.ini
+export PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Application Support"
+
+# set max number of plugin processes based on settings.ini
+export PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=$PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS
+
+# set ulimit values based on settings.ini
+#ulimit -l $PLEX_MEDIA_SERVER_MAX_LOCK_MEM
+ulimit -s $PLEX_MEDIA_SERVER_MAX_STACK_SIZE
+ulimit -n $PLEX_MEDIA_SERVER_MAX_OPEN_FILES
+
+# set locale
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
